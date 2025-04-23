@@ -9,6 +9,7 @@ import { useEditor } from "../hooks/useEditor";
 import { listInputRules } from "../plugins/inputRules";
 import { buildKeymap } from "../plugins/keymap";
 import { persistentSelectionPlugin } from "../plugins/persistentSelection";
+import { placeholderPlugin } from "../plugins/placeholder";
 
 const ProseMirrorEditor = () => {
     const editorRef = useRef<EditorView | null>(null);
@@ -22,6 +23,7 @@ const ProseMirrorEditor = () => {
         const state = EditorState.create({
             schema,
             plugins: [
+                placeholderPlugin("Type something..."),
                 listInputRules(schema),
                 history(),
                 keymap(buildKeymap(schema)),
