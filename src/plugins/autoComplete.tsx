@@ -84,7 +84,7 @@ export const autoCompletePlugin = new Plugin<{
             }
 
             const placeholderNode = document.createElement("span")
-            placeholderNode.className = "pm-placeholder"
+            placeholderNode.className = "autocompletion-text"
             placeholderNode.textContent = autocomplete
 
             return DecorationSet.create(state.doc, [
