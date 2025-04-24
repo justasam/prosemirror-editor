@@ -1,11 +1,12 @@
 import { debounce } from "lodash";
 import { Plugin, PluginKey } from "prosemirror-state";
 import { Decoration, DecorationSet } from "prosemirror-view";
+import { commonWords } from "../data/words";
 
 export const autoCompletePluginKey = new PluginKey("autoCompletePlugin");
 
 const getAutocomplete = async (word: string): Promise<string | null> => {
-    const suggestions = ["apple", "banana", "orange", "grape", "watermelon"];
+    const suggestions = commonWords;
 
     return new Promise((resolve) => {
         setTimeout(() => {
@@ -30,11 +31,12 @@ export const autoCompletePlugin = new Plugin<{
             update: (view, prevState) => {
                 if (prevState.doc.textContent === view.state.doc.textContent && prevState.selection.$from === view.state.selection.$from) return;
 
+                if (!view.state.selection.empty) return
+
                 const { $from } = view.state.selection;
                 const words = $from.nodeBefore?.text ?? "";
                 const wordsAfter = $from.nodeAfter?.text ?? "";
                 const newWord = words.split(" ").pop() || "";
-
 
                 debouncedAutocomplete.cancel();
 

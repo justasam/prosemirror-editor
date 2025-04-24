@@ -12,7 +12,6 @@ export const insertAutocompleteText: Command = (state, dispatch) => {
 
     tr.insertText(autocompleteText, from);
     tr.setMeta(autoCompletePluginKey, { autocomplete: null });
-    tr.scrollIntoView();
     dispatch?.(tr);
 
     return true;
