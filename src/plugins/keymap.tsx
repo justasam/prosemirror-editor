@@ -15,6 +15,7 @@ export const buildKeymap = (schema: Schema) => {
         insertAutocompleteText
     ]
 
+    keys["ArrowRight"] = insertAutocompleteText;
     keys["Escape"] = clearAutocompleteText;
 
     if (schema.nodes.list_item) {
