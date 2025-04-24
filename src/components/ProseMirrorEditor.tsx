@@ -6,6 +6,7 @@ import { EditorView } from "prosemirror-view";
 import { useEffect, useRef } from "react";
 
 import { useEditor } from "../hooks/useEditor";
+import { autoCompletePlugin } from "../plugins/autoComplete";
 import { listInputRules } from "../plugins/inputRules";
 import { buildKeymap } from "../plugins/keymap";
 import { persistentSelectionPlugin } from "../plugins/persistentSelection";
@@ -29,6 +30,7 @@ const ProseMirrorEditor = () => {
                 keymap(buildKeymap(schema)),
                 keymap(baseKeymap),
                 persistentSelectionPlugin,
+                autoCompletePlugin,
             ],
         })
 

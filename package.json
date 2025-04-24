@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/lodash": "^4.17.16",
+    "lodash": "^4.17.21",
     "lucide-react": "^0.503.0",
     "orderedmap": "^2.1.1",
     "prosemirror-commands": "^1.7.1",
