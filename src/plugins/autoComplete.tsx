@@ -49,6 +49,9 @@ export const autoCompletePlugin = new Plugin<{
 
                 debouncedAutocomplete(newWord)?.then((autocomplete) => {
                     if (autocomplete) {
+                        // return if word has changed in the meanwhile
+                        if (view.state.selection.$from.nodeBefore?.text !== words) return;
+
                         view.dispatch(
                             view.state.tr.setMeta(autoCompletePluginKey, { autocomplete })
                         );
