@@ -13,7 +13,7 @@ const getAutocomplete = async (word: string): Promise<string | null> => {
             resolve(
                 suggestions.find((suggestion) => suggestion.startsWith(word) && suggestion.length > word.length)?.slice(word.length) || null
             );
-        }, 100);
+        }, 5);
     });
 }
 
@@ -31,7 +31,10 @@ export const autoCompletePlugin = new Plugin<{
             update: (view, prevState) => {
                 if (prevState.doc.textContent === view.state.doc.textContent && prevState.selection.$from === view.state.selection.$from) return;
 
-                if (!view.state.selection.empty) return
+                if (!view.state.selection.empty) {
+                    view.dispatch(view.state.tr.setMeta(autoCompletePluginKey, { autocomplete: null }));
+                    return;
+                }
 
                 const { $from } = view.state.selection;
                 const words = $from.nodeBefore?.text ?? "";
